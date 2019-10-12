@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>没有节流函数的实例</title>
+<script src="ajax.js"></script>
+<style>
+.div1{
+			position:relative;
+			left:50px;top:50px;
+			width:500px;
+			height:350px;
+			border:1px solid #f00;
+		}
+</style>
+</head>
+<body>
+<div class="div1" id="div1">
+
+</div>
+</body>
+   <script type="text/javascript">
+   	var div1=document.getElementById("div1");
+   	 div1.onclick=function(){
+   		ajax({
+				 url:"success.php",
+				 type:"POST",
+				 data:"节流例子",
+				 contentType:"json",
+				 dataType:"json",
+				 success:function(data){
+					 data=data.data;
+				     if(data[1].status=="10002"){
+						console.log(data[1].msg); 
+				   }
+				   
+				},
+			});
+   	}
+   </script>
+</html>

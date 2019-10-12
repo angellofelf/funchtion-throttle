@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节流函数</title>
+    <script src="ajax.js"></script>
+    <style>
+        .div1{
+			position:relative;
+			left:50px;top:50px;
+			width:500px;
+			height:350px;
+			border:1px solid #f00;
+		}
+    </style>
+</head>
+<body>
+	<div class="div1" id="div1">
+        
+    </div>
+</body>
+<script type="text/javascript">
+		 function throttle(fn,time){
+		 	var timeone=new Date();/*获得一次时间*/
+		 	return function(){
+		 		if (new Date()-timeone>=time) {
+		 			fn.apply(this);
+		 			timeone=new Date();/*重置时间*/
+		 		}
+		 	}
+		 };
+		 
+		 function zoom(){
+			  ajax({
+				 url:"success.php",
+				 type:"POST",
+				 data:"节流例子",
+				 contentType:"json",
+				 dataType:"json",
+				 success:function(data){
+					 data=data.data;
+				     if(data[1].status=="10002"){
+						console.log(data[1].msg);
+				   }
+				},
+			});
+		};
+		var div1=document.getElementById("div1");
+		
+		div1.onclick=throttle(zoom,1000);
+	
+	</script>
+</html>
